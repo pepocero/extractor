@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extractor de Torrents - DonTorrent | Herramienta Profesional</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .logo i {
+      font-size: 2rem;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .btn-back {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      text-decoration: none;
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 0;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      color: white;
+      text-decoration: none;
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 15px 35px rgba(240, 147, 251, 0.4);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(240, 147, 251, 0.5);
+      text-decoration: none;
+      color: white;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 80px 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+    }
+
+    .section-title {
+      text-align: center;
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 60px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    /* Problem Section */
+    .problem {
+      padding: 80px 0;
+      color: white;
+    }
+
+    .problem-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .problem-text h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .problem-text p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .problem-list {
+      list-style: none;
+      margin-top: 30px;
+    }
+
+    .problem-list li {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .problem-list i {
+      color: #f5576c;
+      font-size: 1.2rem;
+    }
+
+    .problem-visual {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .download-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .download-btn {
+      background: #8caa26;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: #6b881e;
+      transform: scale(1.02);
+    }
+
+    /* Solution Section */
+    .solution {
+      padding: 80px 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      color: white;
+    }
+
+    .solution-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .solution-text h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .solution-text p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .solution-list {
+      list-style: none;
+      margin-top: 30px;
+    }
+
+    .solution-list li {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .solution-list i {
+      color: #68d391;
+      font-size: 1.2rem;
+    }
+
+    .solution-visual {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .result-box {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      border: 1px solid #4a5568;
+    }
+
+    /* How it works */
+    .how-it-works {
+      padding: 80px 0;
+      color: white;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .step h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .step p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 80px 0;
+      text-align: center;
+      color: white;
+    }
+
+    .cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .cta p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    .footer {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 40px 0;
+      text-align: center;
+      color: white;
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .problem-content,
+      .solution-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .problem-text h2,
+      .solution-text h2 {
+        font-size: 2rem;
+      }
+
+      .btn-primary {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">
+          <i class="fas fa-download"></i>
+          Extractor de Torrents
+        </div>
+        <a href="https://candeivid.com/utilidades.php" class="btn-back">
+          <i class="fas fa-home"></i> Volver al Inicio
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Extractor de Torrents</h1>
+      <p>La herramienta definitiva para extraer todos los enlaces de descarga de DonTorrent de una sola vez</p>
+      <a href="extractor.php" class="btn-primary">
+        <i class="fas fa-rocket"></i> Acceder al Extractor
+      </a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">¿Por qué usar nuestro Extractor?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3>Ultra Rápido</h3>
+          <p>Extrae todos los enlaces en segundos, sin necesidad de hacer clic en cada episodio individualmente.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-copy"></i>
+          </div>
+          <h3>Fácil de Usar</h3>
+          <p>Simplemente pega la URL de la serie y obtén todos los enlaces listos para copiar y pegar.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>100% Seguro</h3>
+          <p>No almacenamos datos, no requerimos registro. Tu privacidad está garantizada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="problem">
+    <div class="container">
+      <div class="problem-content">
+        <div class="problem-text">
+          <h2>El Problema</h2>
+          <p>Cuando quieres descargar una serie completa de DonTorrent, te encuentras con este problema:</p>
+          <ul class="problem-list">
+            <li><i class="fas fa-times"></i> Cada episodio tiene su propio botón de descarga</li>
+            <li><i class="fas fa-times"></i> Tienes que hacer clic 20 veces para 20 episodios</li>
+            <li><i class="fas fa-times"></i> Cada clic abre una nueva ventana o pestaña</li>
+            <li><i class="fas fa-times"></i> Es un proceso tedioso y lento</li>
+            <li><i class="fas fa-times"></i> Fácil perderte o repetir episodios</li>
+          </ul>
+        </div>
+        <div class="problem-visual">
+          <h3 style="color: white; margin-bottom: 20px;">Proceso Tradicional</h3>
+          <div class="download-buttons">
+            <div class="download-btn">📥 Descargar Episodio 1</div>
+            <div class="download-btn">📥 Descargar Episodio 2</div>
+            <div class="download-btn">📥 Descargar Episodio 3</div>
+            <div class="download-btn">📥 Descargar Episodio 4</div>
+            <div class="download-btn">📥 Descargar Episodio 5</div>
+            <div style="text-align: center; color: #f5576c; margin-top: 10px;">... y así hasta el episodio 20</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="solution">
+    <div class="container">
+      <div class="solution-content">
+        <div class="solution-visual">
+          <h3 style="color: white; margin-bottom: 20px;">Resultado con nuestro Extractor</h3>
+          <div class="result-box">
+https://dontorrent.international/torrent/episodio1.torrent<br>
+https://dontorrent.international/torrent/episodio2.torrent<br>
+https://dontorrent.international/torrent/episodio3.torrent<br>
+https://dontorrent.international/torrent/episodio4.torrent<br>
+https://dontorrent.international/torrent/episodio5.torrent<br>
+...<br>
+https://dontorrent.international/torrent/episodio20.torrent
+          </div>
+          <div style="text-align: center; color: #68d391; margin-top: 15px; font-weight: 600;">
+            ✅ Todos los enlaces en un solo lugar
+          </div>
+        </div>
+        <div class="solution-text">
+          <h2>Nuestra Solución</h2>
+          <p>Con nuestro Extractor de Torrents, el proceso se vuelve súper simple:</p>
+          <ul class="solution-list">
+            <li><i class="fas fa-check"></i> Pegas la URL de la serie completa</li>
+            <li><i class="fas fa-check"></i> El sistema extrae todos los enlaces automáticamente</li>
+            <li><i class="fas fa-check"></i> Obtienes una lista completa lista para copiar</li>
+            <li><i class="fas fa-check"></i> Pegas todos los enlaces en tu gestor de torrents</li>
+            <li><i class="fas fa-check"></i> ¡Descarga toda la serie de una vez!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">¿Cómo Funciona?</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Copia la URL</h3>
+          <p>Copia el enlace de la página de la serie en DonTorrent que quieres descargar completa.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Pega en el Extractor</h3>
+          <p>Pega la URL en nuestro extractor y haz clic en "Extraer enlaces".</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Obtén todos los enlaces</h3>
+          <p>En segundos tendrás todos los enlaces .torrent listos en un cuadro de texto.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Copia y Descarga</h3>
+          <p>Copia todos los enlaces y pégalos en tu gestor de torrents favorito.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2>¡Empieza a Descargar Más Rápido!</h2>
+      <p>No pierdas más tiempo haciendo clic en cada episodio. Usa nuestro extractor y descarga series completas en segundos.</p>
+      <a href="extractor.php" class="btn-primary">
+        <i class="fas fa-download"></i> Acceder al Extractor
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Extractor de Torrents - Herramienta profesional para DonTorrent</p>
+    </div>
+  </footer>
+</body>
+</html>
